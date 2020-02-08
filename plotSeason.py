@@ -2,16 +2,19 @@ import matplotlib.pyplot as plotter
 import math
 
 def plotSeason(seriesTitle,seasonNumber,episodes,ratings):
-    plotter.plot(episodes,ratings)
     i = 0;
-    for rating in ratings:
+    s_rating = ratings[seasonNumber-1]
+    for rating in s_rating:
         print(rating)
-        plotter.text(i+1, float(rating), float(rating))
+        plotter.text(i+1, rating, str(rating))
         i = i+1
-
-    print(str(len(episodes)) + " episodes in season " + str(seasonNumber) + " of " + seriesTitle)
+    plotter.plot(episodes[seasonNumber-1], ratings[seasonNumber-1])
+    print(str(len(episodes[int(seasonNumber)-1])) + " episodes in season " + str(seasonNumber) + " of " + seriesTitle)
     plotter.autoscale(False)
-    plotter.axis([1, len(episodes), 1, 10])
+    print("**************" + str(len(episodes[int(seasonNumber)-1])) + "*******")
+    plotter.axis([1, len(episodes[int(seasonNumber)-1]), 1, 10])
+    plotter.title("Ratings of " + str(seriesTitle) + " Season "+ str(seasonNumber))
+
     plotter.show()
 
 
