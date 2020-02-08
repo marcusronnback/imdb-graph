@@ -6,7 +6,21 @@ def plotSeason(seriesTitle,seasonNumber,episodes,ratings):
     s_rating = ratings[seasonNumber-1]
     for rating in s_rating:
         print(rating)
-        plotter.text(i+1, rating, str(rating))
+        if rating == 0.0:
+            if i == 0:
+                n_rating = (s_rating[i + 1] * 2) / 2
+                plotter.text(i + 1, n_rating, str(n_rating), color="red")
+                ratings[seasonNumber - 1][i] = n_rating
+            if i == (len(ratings[seasonNumber-1])-1):
+                n_rating = (s_rating[i - 1] * 2) / 2
+                plotter.text(i + 1, n_rating, str(n_rating), color="red")
+                ratings[seasonNumber - 1][i] = n_rating
+            else:
+                n_rating = (s_rating[i - 1] + s_rating[i + 1]) / 2
+                plotter.text(i + 1, n_rating, str(n_rating), color="red")
+                ratings[seasonNumber - 1][i] = n_rating
+        else:
+            plotter.text(i+1, rating, str(rating))
         i = i+1
     plotter.plot(episodes[seasonNumber-1], ratings[seasonNumber-1])
     print(str(len(episodes[int(seasonNumber)-1])) + " episodes in season " + str(seasonNumber) + " of " + seriesTitle)
@@ -14,7 +28,6 @@ def plotSeason(seriesTitle,seasonNumber,episodes,ratings):
     print("**************" + str(len(episodes[int(seasonNumber)-1])) + "*******")
     plotter.axis([1, len(episodes[int(seasonNumber)-1]), 1, 10])
     plotter.title("Ratings of " + str(seriesTitle) + " Season "+ str(seasonNumber))
-
     plotter.show()
 
 
