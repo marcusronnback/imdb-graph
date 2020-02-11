@@ -24,12 +24,15 @@ def plotSeason(seriesTitle,seasonNumber,episodes,ratings):
         i = i+1
     plotter.plot(episodes[seasonNumber-1], ratings[seasonNumber-1])
     print(str(len(episodes[int(seasonNumber)-1])) + " episodes in season " + str(seasonNumber) + " of " + seriesTitle)
-    plotter.autoscale(False)
-    print("**************" + str(len(episodes[int(seasonNumber)-1])) + "*******")
-    plotter.axis([1, len(episodes[int(seasonNumber)-1]), 1, 10])
-    plotter.title("Ratings of " + str(seriesTitle) + " Season "+ str(seasonNumber))
-    plotter.show()
-
+    if len(episodes[int(seasonNumber)-1]) != 0:
+        plotter.autoscale(False)
+        print("**************" + str(len(episodes[int(seasonNumber)-1])) + "*******")
+        plotter.axis([1, len(episodes[int(seasonNumber)-1]), 1, 10])
+        plotter.title("Ratings of " + str(seriesTitle) + " Season "+ str(seasonNumber))
+        plotter.show()
+    else:
+        print("No more seasons released")
+        exit(0)
 
 def plotSeasons(seasonTitle,seasonEpisodes,ratings):
     print("Grid: "+ str(math.ceil(math.sqrt(len(seasonEpisodes)))) + "x" + str(math.ceil(math.sqrt(len(seasonEpisodes)))))
